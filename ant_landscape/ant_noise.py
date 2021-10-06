@@ -665,10 +665,30 @@ def noise_gen(coords, props):
     if not sphere:
         if falloff:
             ratio_x, ratio_y = abs(x) * 2 / meshsize_x, abs(y) * 2 / meshsize_y
+            ratio_x, ratio_y = ratio_x**falloffsize_x, ratio_y**falloffsize_y
+            sarx = sqrt(ratio_x)
+            snrx = 0 if (x > 0) else sarx
+            sprx = 0 if (x < 0) else sarx
+            sary = sqrt(ratio_y)
+            snry = 0 if (y > 0) else sary
+            spry = 0 if (y < 0) else sary
+            snrxnry = sqrt((0 if (x > 0) else ratio_x) + (0 if (y > 0) else ratio_y))
+            snrxpry = sqrt((0 if (x > 0) else ratio_x) + (0 if (y < 0) else ratio_y))
+            sprxpry = sqrt((0 if (x < 0) else ratio_x) + (0 if (y < 0) else ratio_y))
+            sprxnry = sqrt((0 if (x < 0) else ratio_x) + (0 if (y > 0) else ratio_y))
+            sarxary = sqrt(ratio_x + ratio_y)
             fallofftypes = [0,
-                            sqrt(ratio_y**falloffsize_y),
-                            sqrt(ratio_x**falloffsize_x),
-                            sqrt(ratio_x**falloffsize_x + ratio_y**falloffsize_y)
+                            sarx,
+                            snrx,
+                            sprx,
+                            sary,
+                            snry,
+                            spry,
+                            snrxnry,
+                            snrxpry,
+                            sprxpry,
+                            sprxnry,
+                            sarxary
                            ]
             dist = fallofftypes[falloff]
             value -= edge_level

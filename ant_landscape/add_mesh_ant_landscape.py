@@ -456,16 +456,24 @@ class AntAddLandscape(bpy.types.Operator):
             max=1000.0,
             description="Effect height offset"
             )
-
     edge_falloff: EnumProperty(
             name="Falloff",
             default="3",
             description="Flatten edges",
             items = [
                 ("0", "None", "None", 0),
-                ("1", "Y", "Y Falloff", 1),
-                ("2", "X", "X Falloff", 2),
-                ("3", "X Y", "X Y Falloff", 3)]
+                ("1", "X", "X Falloff", 1),
+                ("2", "-X", "-X Falloff", 2),
+                ("3", "+X", "+X Falloff", 3),
+                ("4", "Y", "Y Falloff", 4),
+                ("5", "-Y", "-Y Falloff", 5),
+                ("6", "+Y", "+Y Falloff", 6),
+                ("7", "-X -Y", "-X -Y Falloff", 7),
+                ("8", "-X +Y", "-X +Y Falloff", 8),
+                ("9", "+X +Y", "+X +Y Falloff", 9),
+                ("10", "+X -Y", "+X -Y Falloff", 10),
+                ("11", "X Y", "X Y Falloff", 11)
+                ]
             )
     falloff_x: FloatProperty(
             name="Falloff X",
